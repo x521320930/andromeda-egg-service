@@ -2,6 +2,7 @@
 
 'use strict';
 
+const path = require('path');
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
@@ -23,8 +24,30 @@ module.exports = appInfo => {
     // myAppName: 'egg',
   };
 
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+  };
+
+
+  config.static = {
+    prefix: '/static/',
+    dir: [ path.join(appInfo.baseDir, 'app/public'), path.join(appInfo.baseDir, 'app/www') ],
+    dynamic: true,
+    preload: false,
+    buffer: false,
+    maxFiles: 1000,
+  };
+
+
+  config.validate = { // 配置参数校验器，基于parameter
+    convert: true, // 对参数可以使用convertType规则进行类型转换
+    validateRoot: false,
+  };
   return {
     ...config,
     ...userConfig,
   };
 };
+

@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 module.exports.mysql = {
   // 单数据库信息配置
@@ -17,5 +17,6 @@ module.exports.mysql = {
   // 是否加载到 app 上，默认开启
   app: true,
   // 是否加载到 agent 上，默认关闭
-  agent: false
-}
+  agent: false,
+};
+

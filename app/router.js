@@ -6,4 +6,9 @@
 module.exports = app => {
   const { router, controller } = app;
   router.get('/', controller.home.index);
+  // 登录
+  router.post('/login', controller.login.login);
+  router.post('/signUp', controller.login.signUp);
+  // 文章
+  router.post('/article/add', controller.article.add);
 };
