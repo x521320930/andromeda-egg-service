@@ -9,6 +9,7 @@ module.exports = app => {
   // 登录
   router.post('/login', controller.login.login);
   router.post('/signUp', controller.login.signUp);
+  router.post('/passwordRest', controller.login.passwordRest);
   // 文章
   router.post('/article/add', controller.article.add);
 };
