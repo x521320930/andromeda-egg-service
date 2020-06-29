@@ -59,7 +59,6 @@ class LoginController extends Controller {
     const { ctx, app } = this;
     const body = ctx.request.body;
     const err = app.validator.validate(validate, body);
-    console.log(err);
     if (err) {
       ctx.status = 422;
       ctx.body = { msg: '请求格式正确，但是由于含有语义错误，无法响应!', code: 1, data: {} };
