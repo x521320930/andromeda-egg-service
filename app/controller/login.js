@@ -1,6 +1,6 @@
 'use strict';
 const Controller = require('egg').Controller;
-
+const crypto = require('crypto');
 class LoginController extends Controller {
 
   /**
@@ -28,13 +28,27 @@ class LoginController extends Controller {
       try {
         const result = await ctx.service.login.find(sql);
         if (result.length !== 0) {
+          /**
+           * Hmac类是一个实用工具，用于创建加密的 HMAC 摘要。 它可以通过以下两种方式之一使用
+           *  · 作为可读写的流，其中写入数据以在可读侧生成计算后的 HMAC 摘要。
+           *  · 使用 hmac.update() 和 hmac.digest() 方法生成计算后的 HMAC 摘要
+           * crypto.createHmac() 方法用于创建 Hmac 实例。 不能使用 new 关键字直接地创建 Hmac 对象
+           */
+          // console.log(app.keys);
+
+          // crypto.createCipheriv('aes-128-cbc', key, iv)
+          //   .update(result[0].id + '', 'binary', 'base64');
+          // // const hash = crypto.createHmac('sha256', 'xiafengkun')
+          // //   .digest('hex');
+          // console.log(decipher);
           // 放入cookies
-          ctx.cookies.set('SESSION', result[0].id, { maxAge: 3600000, encrypt: true });
+          ctx.cookies.set('SESSION', result[0].id, { maxAge: 3600000, encrypt: false });
           ctx.body = { msg: '成功', code: 0, data: { userInfo: result[0] } };
         } else {
           ctx.body = { msg: '用户或密码不正确!', code: 1, data: {} };
         }
       } catch (msg) {
+        console.log(msg);
         return { msg, code: 2, data: {} };
       }
     }
@@ -82,6 +96,7 @@ class LoginController extends Controller {
     const cookies = ctx.cookies.get('SESSION', { signed: false });
     ctx.body = { msg: '', data: { test: cookies }, code: 0 };
   }
+
 }
 
 

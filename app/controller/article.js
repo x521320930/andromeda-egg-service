@@ -41,7 +41,11 @@ class ArticleController extends Controller {
    */
 
   async add() {
-
+    const validate = {
+      user_name: { type: 'string', required: true },
+      password: { type: 'string', required: true },
+      source_type: { type: 'string', required: true },
+    };
     const { ctx } = this;
     
     const validate = {
