@@ -12,4 +12,7 @@ module.exports = app => {
   router.post('/passwordRest', controller.login.passwordRest);
   // 文章
   router.post('/article/add', controller.article.add);
+
+  // 测试
+  router.post('/test', controller.test.de);
 };
